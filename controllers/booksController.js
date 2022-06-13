@@ -4,6 +4,7 @@ const controller = {
     index: function(req, res) {
         db.Book.findAll()
             .then(function (books) {
+                console.log(books[0].id);
                 res.render('books_index', { books });
             })
             .catch(function (error) {
@@ -14,6 +15,7 @@ const controller = {
         db.Book.findAll({
             'where': {'author': req.params.author}
         }).then(function (result) {
+            console.log(result);
             res.render('books_index', { books: result });
         }).catch(function (error) {
             res.send(error);

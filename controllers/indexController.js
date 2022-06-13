@@ -8,7 +8,7 @@ const controller = {
     login: function(req, res) {
         res.render('login', { title: 'Login'});
     },
-    access: function(req, res, next) {
+    access: function(req, res, next) { console.log(req.body);
         db.User.findOne({ where: { username: req.body.username }})
             .then(function(user) {
                 if (!user) throw Error('User not found.')
@@ -24,7 +24,10 @@ const controller = {
             })
             .catch(function (err) {
                 next(err)
-            })
+            })/*
+            db.User.findAll().then((data)=>{
+                res.send(data)
+            })*/
     },
     logout: function (req, res, next) {
         req.session.user = null;
